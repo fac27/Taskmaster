@@ -7,14 +7,8 @@ function markTaskAsComplete() {
 function deleteTask() {
 }
 
-let incomplete = [
+let tasks = [
   {
-    task: "Wash dishes", taskstatus: "not done"
-  }
-];
-
-let complete = [
-  {
-    task: "Do laundry", taskstatus: "done"
+    task: "Do laundry", taskstatus: false
   }
 ];
