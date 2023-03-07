@@ -5,17 +5,40 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ICONSCOUT CDN LINK -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+  <!-- styles -->
+  <link rel="stylesheet" href="styles.css">
+
   <title>Task Master</title>
-  <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="center stack-xl">
 
-  <section>
+  <header class="stack-s">
     <h1>Taskmaster</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, ipsum.</p>
-  </section>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, ipsum.</p>
+  </header>
 
+  <section class="stack-s todo-list">
+    <h2>Todos: </h2>
+
+    <template id="template">
+
+      <article class="flex  gap-m todo">
+        <input type="checkbox">
+
+        <p class="task"></p>
+
+        <button class="edit-btn"><i class="uil uil-edit"></i></button>
+        <button class="delete-btn"><i class="uil uil-trash"></i></button>
+      </article>
+
+    </template>
+  </section>
 
 
   <script src="/app.js"></script>
