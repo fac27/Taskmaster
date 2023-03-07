@@ -34,3 +34,12 @@ const createTasks = (tasks) => {
 };
 
 mockData.forEach(createTasks);
+
+function addTask() {
+}
+
+function markTaskAsComplete() {
+}
+
+function deleteTask() {
+}
