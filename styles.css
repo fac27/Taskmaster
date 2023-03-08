@@ -63,3 +63,55 @@ body {
 .gap-m {
   gap: 1rem;
 }
+
+/* ---------------------------- */
+/* todo header */
+.todo-section {
+  width: 90%;
+}
+
+.todo-header {
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+/* add task button */
+.add-task {
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  border: 1px solid gainsboro;
+  cursor: pointer;
+  font-size: 1rem;
+
+  background: #023047;
+  color: #fff;
+}
+
+/* todo template section */
+.todo-list {
+  margin-top: 0.5rem;
+}
+
+.task {
+  text-transform: capitalize;
+}
+
+.buttons {
+  margin-left: auto;
+}
+
+.buttons button {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.edit-btn {
+  color: #8338ec;
+}
+
+.delete-btn {
+  color: #ff006e;
+}
