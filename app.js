@@ -51,6 +51,13 @@ const createTask = () => {
     const id = responseJson[0];
 
     const taskValue = taskInput.value;
+
+    // prevent task submission if nothing is typed in by user
+    if (taskValue === '') {
+      alert('Please type in a task');
+      return;
+    }
+
     const done = false;
 
     const task = { id, task: taskValue, done };
