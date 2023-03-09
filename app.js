@@ -1,5 +1,7 @@
 // Todo list tasks
-const tasks = [{ task: 'Go to the gym', done: false, id: 18 }];
+const tasks = [];
+
+// { task: 'Go to the gym', done: false, id: 18 }
 
 const todoSection = document.querySelector('.todo-section');
 const todoContainer = document.querySelector('.todos');
@@ -18,12 +20,16 @@ const displayTasks = (tasks) => {
 
   // add event listener to delete the task
   const deleteBtn = domFragment.querySelector('.delete-btn');
-  const taskText = getTaskText(deleteBtn);
-  deleteBtn.addEventListener('click', () => deleteTask(taskText));
+  deleteBtn.addEventListener('click', () =>
+    deleteTask(getTaskText(deleteBtn, 'button'))
+  );
 
-  // add event listener to complete the task
-  // const checkbox = domFragment.querySelector('#checkbox');
-  // checkbox.addEventListener('click', markTaskAsComplete);
+  // add event listener to toggle checkbox
+  const checkbox = domFragment.querySelector('#checkbox');
+  checkbox.addEventListener('click', (e) => {
+    const [taskText, status] = getTaskText(checkbox, 'input');
+    toggleCheckbox(e, taskText, status);
+  });
 
   // add the fragment into the document
   todoContainer.appendChild(domFragment);
@@ -52,16 +58,8 @@ const createTask = () => {
   submitTaskBtn.addEventListener('click', async (e) => {
     e.preventDefault();
 
-    // get a unique id to attach to each task
-    // const response = await fetch('https://www.uuidgenerator.net/api/version1', {
-    //   headers: { Accept: 'application/json' },
-    // });
-    // const responseJson = await response.json();
-    // const id = responseJson[0];
-
     const taskValue = taskInput.value;
     const done = false;
-
     const task = { task: taskValue, done };
 
     // add the task to the list
@@ -80,13 +78,20 @@ document.querySelector('.add-task').addEventListener('click', createTask);
 
 // ----------------------------
 // delete tasks from list and array
-const getTaskText = (e) => {
-  return e.parentElement.parentElement.children[1].textContent;
+const getTaskText = (el, type) => {
+  // check element type before getting task text.
+  // if its input, return text and status (true || false) otherwise return text
+  if (type === 'input') {
+    return el.checked
+      ? [el.parentElement.children[1].textContent, true]
+      : [el.parentElement.children[1].textContent, false];
+  } else {
+    return el.parentElement.parentElement.children[1].textContent;
+  }
 };
 
 const deleteTask = (taskText) => {
   const task = tasks.filter((task) => task.task === taskText)[0];
-  // remove the task from the array
   tasks.splice(tasks.indexOf(task), 1);
 
   // update the page
@@ -96,8 +101,14 @@ const deleteTask = (taskText) => {
 
 // ----------------------------
 // mark completed tasks
-const markTaskAsComplete = (taskText, status) => {
-  console.log(taskText);
+const toggleCheckbox = (e, taskText, status) => {
+  const task = tasks.filter((task) => task.task === taskText)[0];
+  task.done = status;
+
+  const taskElement = e.target.parentElement.children[1];
+  status
+    ? taskElement.classList.add('done')
+    : taskElement.classList.remove('done');
 };
 
 // ----------------------------
