@@ -1,7 +1,5 @@
 // Todo list tasks
-const tasks = [];
-
-// { task: 'Go to the gym', done: false, id: 18 }
+const tasks = [{ task: 'wash the dishes', done: false }];
 
 const todoSection = document.querySelector('.todo-section');
 const todoContainer = document.querySelector('.todos');
@@ -28,7 +26,7 @@ const displayTasks = (tasks) => {
   const checkbox = domFragment.querySelector('#checkbox');
   checkbox.addEventListener('click', (e) => {
     const [taskText, status] = getTaskText(checkbox, 'input');
-    toggleCheckbox(e, taskText, status);
+    toggleCheckbox(taskText, status);
   });
 
   // add the fragment into the document
@@ -101,11 +99,14 @@ const deleteTask = (taskText) => {
 
 // ----------------------------
 // mark completed tasks
-const toggleCheckbox = (e, taskText, status) => {
+const toggleCheckbox = (taskText, status) => {
   const task = tasks.filter((task) => task.task === taskText)[0];
   task.done = status;
 
-  const taskElement = e.target.parentElement.children[1];
+  const taskElement = Array.from(document.querySelectorAll('.task')).filter(
+    (task) => task.textContent === taskText
+  )[0];
+
   status
     ? taskElement.classList.add('done')
     : taskElement.classList.remove('done');
