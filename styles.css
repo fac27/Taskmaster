@@ -15,7 +15,6 @@ body {
 }
 
 /* styles are mobile first by default */
-
 /* ------------------------ */
 /* primitive styles */
 .center {
@@ -67,7 +66,7 @@ body {
 /* ---------------------------- */
 /* todo header */
 .todo-section {
-  width: 90%;
+  width: 80%;
 }
 
 .todo-header {
@@ -84,17 +83,24 @@ body {
   cursor: pointer;
   font-size: 1rem;
 
-  background: #023047;
+  background: #2172e6;
   color: #fff;
 }
 
 /* todo template section */
 .todo-list {
   margin-top: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid black;
 }
 
 .task {
   text-transform: capitalize;
+}
+
+/* strike through completed tasks */
+.task.done {
+  text-decoration: line-through;
 }
 
 .buttons {
