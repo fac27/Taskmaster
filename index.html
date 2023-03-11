@@ -11,43 +11,35 @@
 
   <!-- styles -->
   <link rel="stylesheet" href="styles.css">
-
   <title>Task Master</title>
 </head>
 
 <body class="center stack-xl">
 
-  <header class="stack-s">
+  <header class="flex header">
     <h1>Taskmaster</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, ipsum.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, ipsum.</p>
+    <span><i class="uil uil-notes"></i></i></span>
   </header>
 
   <section class="stack-m todo-section">
-    <!-- todo header -->
-    <div class="flex todo-header">
-      <h2>Todos <span><i class="uil uil-clipboard-notes"></i></span></h2>
+    <!-- add task form -->
+    <form class="task-form">
+      <input type="text" name="task" class="task-input" placeholder="✍️ Add a new task"
+        required>
+      <button class="add-task">Submit</button>
+    </form>
 
-      <div class="sort">
-        <label for="sortby">Filter by:</label>
-        <select name="sortby" id="sortby">
-          <option value="select">Select</option>
-          <option value="name">Finished</option>
-          <option value="date">Added</option>
-        </select>
+    <div class="flex filters">
+      <div class="flex gap-m left">
+        <button class="active all-filter">All</button>
+        <button class="pending-filter">Pending</button>
+        <button class="completed-filter">Completed</button>
+      </div>
+
+      <div class="right">
+        <button class="clear-tasks">Clear All</button>
       </div>
     </div>
-
-    <!-- add task button -->
-    <button class="add-task">Add Task</button>
-
-    <!-- add task form template -->
-    <template id="form-template">
-      <form class="task-form">
-        <input type="text" name="task" class="task-input" required>
-        <button class="submit-task">Submit</button>
-      </form>
-    </template>
 
     <!-- todo list template -->
     <template id="todo-template">

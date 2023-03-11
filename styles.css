@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
 
 * {
   margin: 0;
@@ -64,20 +65,42 @@ body {
 }
 
 /* ---------------------------- */
+/* header section */
+.header {
+  margin-top: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid gainsboro;
+}
+
+.header h1 {
+  font-family: 'Kalam', cursive;
+  color: #8338ec;
+}
+
+.header span {
+  font-size: 1.7rem;
+  color: #1d3557;
+  cursor: pointer;
+}
+
+/* ---------------------------- */
 /* todo header */
 .todo-section {
-  width: 80%;
+  width: 90%;
 }
 
-.todo-header {
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid black;
+/*  add task form*/
+.task-input {
+  padding: 0.6rem;
+  border-radius: 0.3rem;
+  border: 1px solid grey;
+  width: 70%;
 }
 
-/* add task button */
 .add-task {
-  padding: 0.4rem;
+  margin-left: 0.5rem;
+  padding: 0.5rem;
   border-radius: 0.3rem;
   border: 1px solid gainsboro;
   cursor: pointer;
@@ -85,6 +108,34 @@ body {
 
   background: #2172e6;
   color: #fff;
+}
+
+/* filters */
+.filters {
+  gap: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid black;
+}
+
+.filters .left button,
+.filters .right button {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.filters button.active {
+  font-weight: bold;
+  color: #2172e6;
+  border-bottom: 1px solid #2172e6;
+}
+
+.filters .right button {
+  background: #d31265;
+  color: #fff;
+  border-radius: 0.2rem;
+  padding: 0.4rem;
 }
 
 /* todo template section */
@@ -120,4 +171,23 @@ body {
 
 .delete-btn {
   color: #ff006e;
+}
+
+@media screen and (min-width: 650px) {
+  .center {
+    width: 70%;
+  }
+
+  .todo-section {
+    width: 80%;
+  }
+
+  .filters {
+    margin-top: 3rem;
+    gap: 6rem;
+  }
+
+  .todo-list {
+    width: 70%;
+  }
 }

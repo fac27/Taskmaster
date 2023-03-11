@@ -1,5 +1,6 @@
+// ----------------------------
 // Todo list tasks
-const tasks = [{ task: 'wash the dishes', done: false }];
+let tasks = [];
 
 const todoSection = document.querySelector('.todo-section');
 const todoContainer = document.querySelector('.todos');
@@ -7,14 +8,15 @@ const formContainer = document.querySelector('.forms');
 
 // ----------------------------
 // display the tasks on the page
-const displayTasks = (tasks) => {
-  const { task } = tasks;
+const updateTasks = (todos) => {
+  const { task, done } = todos;
 
   const todoTemplate = document.querySelector('#todo-template');
   const domFragment = todoTemplate.content.cloneNode(true);
 
-  // add task task into the element
   domFragment.querySelector('.task').textContent = task;
+  done ? domFragment.querySelector('.task').classList.add('done') : null;
+  done ? (domFragment.querySelector('#checkbox').checked = true) : null;
 
   // add event listener to delete the task
   const deleteBtn = domFragment.querySelector('.delete-btn');
@@ -22,63 +24,96 @@ const displayTasks = (tasks) => {
     deleteTask(getTaskText(deleteBtn, 'button'))
   );
 
-  // add event listener to toggle checkbox
+  // add event listener for editing a task
+  const editBtn = domFragment.querySelector('.edit-btn');
+  editBtn.addEventListener('click', () =>
+    editTask(getTaskText(editBtn, 'button'))
+  );
+
+  // add event listener to toggle the checkbox
   const checkbox = domFragment.querySelector('#checkbox');
-  checkbox.addEventListener('click', (e) => {
+  checkbox.addEventListener('click', () => {
     const [taskText, status] = getTaskText(checkbox, 'input');
     toggleCheckbox(taskText, status);
   });
 
-  // add the fragment into the document
+  // insert article into dom
   todoContainer.appendChild(domFragment);
 };
 
 // ----------------------------
-// create tasks dynamically and add them to array using template
-const addTask = (task) => {
+// toggle between the filters
+const getAllTasks = () => {
+  todoContainer.innerHTML = '';
+  tasks.forEach(updateTasks);
+};
+
+const getPendingTasks = () => {
+  const newTasks = tasks.filter((task) => !task.done);
+  todoContainer.innerHTML = '';
+  newTasks.forEach(updateTasks);
+};
+
+const getCompletedTasks = () => {
+  const newTasks = tasks.filter((task) => task.done);
+  todoContainer.innerHTML = '';
+  newTasks.forEach(updateTasks);
+};
+
+const toggleFilters = (active, btn2, btn3) => {
+  active.classList.add('active');
+  btn2.classList.remove('active');
+  btn3.classList.remove('active');
+};
+
+const allFilterBtn = document.querySelector('.all-filter');
+const pendingFilterBtn = document.querySelector('.pending-filter');
+const completedFilterBtn = document.querySelector('.completed-filter');
+const clearAllBtn = document.querySelector('.clear-tasks');
+
+allFilterBtn.addEventListener('click', () => {
+  toggleFilters(allFilterBtn, pendingFilterBtn, completedFilterBtn);
+  getAllTasks();
+});
+
+pendingFilterBtn.addEventListener('click', () => {
+  toggleFilters(pendingFilterBtn, allFilterBtn, completedFilterBtn);
+  getPendingTasks();
+});
+
+completedFilterBtn.addEventListener('click', () => {
+  toggleFilters(completedFilterBtn, pendingFilterBtn, allFilterBtn);
+  getCompletedTasks();
+});
+
+// clear all tasks
+clearAllBtn.addEventListener('click', () => {
+  tasks = [];
+  todoContainer.innerHTML = '';
+});
+
+// ----------------------------
+// add tasks
+const addTask = (e) => {
+  e.preventDefault();
+
+  const taskValue = document.querySelector('.task-input').value;
+  const done = false;
+  const task = { task: taskValue, done };
+
   tasks.push(task);
+  e.target.reset();
+
+  // clear the previous tasks first before updating
+  todoContainer.innerHTML = '';
+  tasks.forEach(updateTasks);
 };
 
-const createTask = () => {
-  // clear the canvas first
-  formContainer.innerHTML = '';
-
-  const formTemplate = document.querySelector('#form-template');
-  const domFragment = formTemplate.content.cloneNode(true);
-
-  // display the template form.
-  formContainer.appendChild(domFragment);
-
-  const taskInput = document.querySelector('.task-input');
-  const submitTaskBtn = document.querySelector('.submit-task');
-
-  // create a task once user clicks submit
-  submitTaskBtn.addEventListener('click', async (e) => {
-    e.preventDefault();
-
-    const taskValue = taskInput.value;
-    const done = false;
-    const task = { task: taskValue, done };
-
-    // add the task to the list
-    addTask(task);
-
-    // clear the previous tasks first before updating
-    todoContainer.innerHTML = '';
-    tasks.forEach(displayTasks);
-
-    // hide/delete the task form
-    document.querySelector('.task-form').style.display = 'none';
-  });
-};
-
-document.querySelector('.add-task').addEventListener('click', createTask);
+document.querySelector('.task-form').addEventListener('submit', addTask);
 
 // ----------------------------
 // delete tasks from list and array
 const getTaskText = (el, type) => {
-  // check element type before getting task text.
-  // if its input, return text and status (true || false) otherwise return text
   if (type === 'input') {
     return el.checked
       ? [el.parentElement.children[1].textContent, true]
@@ -92,9 +127,17 @@ const deleteTask = (taskText) => {
   const task = tasks.filter((task) => task.task === taskText)[0];
   tasks.splice(tasks.indexOf(task), 1);
 
-  // update the page
   todoContainer.innerHTML = '';
-  tasks.forEach(displayTasks);
+  tasks.forEach(updateTasks);
+};
+
+// ----------------------------
+// edit tasks
+const editTask = (taskText) => {
+  const inputElement = document.querySelector('.task-input');
+  inputElement.value = taskText;
+  inputElement.focus();
+  deleteTask(taskText);
 };
 
 // ----------------------------
@@ -111,7 +154,3 @@ const toggleCheckbox = (taskText, status) => {
     ? taskElement.classList.add('done')
     : taskElement.classList.remove('done');
 };
-
-// ----------------------------
-// edit tasks
-// const editTask = (task) => {};
