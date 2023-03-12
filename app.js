@@ -98,15 +98,36 @@ const addTask = (e) => {
   e.preventDefault();
 
   const taskValue = document.querySelector('.task-input').value;
-  const done = false;
-  const task = { task: taskValue, done };
 
-  tasks.push(task);
-  e.target.reset();
+  if (taskIsUnique(taskValue)) {
+    const done = false;
+    const task = { task: taskValue, done };
 
-  // clear the previous tasks first before updating
-  todoContainer.innerHTML = '';
-  tasks.forEach(updateTasks);
+    tasks.push(task);
+    e.target.reset();
+
+    // clear the previous tasks first before updating
+    todoContainer.innerHTML = '';
+    tasks.forEach(updateTasks);
+  } else {
+    const erroDiv = document.querySelector('.error-div');
+    erroDiv.innerHTML = '';
+
+    const errorMessageElement = document.createElement('p');
+    errorMessageElement.className = 'error';
+    errorMessageElement.textContent = 'tasks must be unique';
+
+    erroDiv.append(errorMessageElement);
+
+    setTimeout(
+      () => (document.querySelector('.error').style.display = 'none'),
+      2000
+    );
+  }
+};
+
+const taskIsUnique = (taskText) => {
+  return tasks.filter((task) => task.task === taskText).length < 1;
 };
 
 document.querySelector('.task-form').addEventListener('submit', addTask);
