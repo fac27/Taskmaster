@@ -173,6 +173,16 @@ body {
   color: #ff006e;
 }
 
+/* error message */
+.error {
+  width: 70%;
+  text-transform: capitalize;
+  background: #d31265;
+  color: #fff;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+}
+
 @media screen and (min-width: 650px) {
   .center {
     width: 70%;
