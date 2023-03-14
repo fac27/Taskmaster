@@ -98,3 +98,29 @@ test('E2E test: Editing a task updates it after submission', () => {
 
   equal(expected, actual);
 });
+
+test('E2E test: "Clear all" button clears all tasks from the list', () => {
+  // Add some tasks
+  const addNewTask = document.querySelector('.task-input');
+  addNewTask.value = 'Task 1';
+  const submitButton = document.querySelector('.add-task');
+  submitButton.click();
+
+  addNewTask.value = 'Task 2';
+  submitButton.click();
+
+  addNewTask.value = 'Task 3';
+  submitButton.click();
+
+  // Click the clear button
+  const clearButton = document.querySelector('.clear-tasks');
+  clearButton.click();
+
+  // Check if all tasks are cleared from the DOM
+  const todos = todoContainer.querySelectorAll('.todo-list');
+
+  const expected = true;
+  const actual = todos.length === 0;
+
+  equal(expected, actual);
+});
