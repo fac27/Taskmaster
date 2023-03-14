@@ -24,7 +24,7 @@
 // END TO END TESTS
 
 // add a task
-function addTaskTest() {
+test('E2E test: Submitting a new task adds it to the list', () => {
   const addNewTask = document.querySelector('.task-input');
   addNewTask.value = 'Mop the floor';
 
@@ -33,18 +33,15 @@ function addTaskTest() {
 
   const resultElement = todoContainer.querySelector('.todo-list');
 
-  // Check if the text content of the 'result' element matches the expected value
-  if (resultElement.textContent.includes(addNewTask.value)) {
-    console.log('Test passed: Task added successfully');
-  } else {
-    console.error('Test failed.');
-  }
-}
+  const expected = true;
+  const actual = resultElement.textContent.includes(addNewTask.value);
 
-addTaskTest();
+  equal(expected, actual);
+});
 
 // delete a task
-function deleteTaskTest() {
+
+test('E2E test: Deleting an entry removes it from the list', () => {
   const addNewTask = document.querySelector('.task-input');
   addNewTask.value = 'Go to the gym';
 
@@ -64,16 +61,15 @@ function deleteTaskTest() {
   const todo = todos[todos.length - 1];
   const todoText = todo.querySelector('.task');
 
-  if (!(todoText.textContent === 'Go to the gym')) {
-    console.log('Task deleted successfully!');
-  } else {
-    console.error('Task delete failed. Task element still exists in the DOM.');
-  }
-}
+  const expected = true;
+  const actual = !(todoText.textContent === 'Go to the gym');
 
-deleteTaskTest();
+  equal(expected, actual);
+});
 
-function editTaskTest() {
+// edit a task
+
+test('E2E test: Editing a task updates it after submission', () => {
   const addNewTask = document.querySelector('.task-input');
   addNewTask.value = 'Get Groceries';
 
@@ -97,13 +93,8 @@ function editTaskTest() {
   const todoText = todo.querySelector('.task');
 
   // Check if the text content of the task element matches the expected value
-  if (todoText.textContent === 'Vacuum the floor') {
-    console.log('Test passed: Task edited successfully!');
-  } else {
-    console.error(
-      `Task edit failed. Expected "Vacuum the floor", but got "${todoText.textContent}"`
-    );
-  }
-}
+  const expected = true;
+  const actual = todoText.textContent === 'Vacuum the floor';
 
-editTaskTest();
+  equal(expected, actual);
+});
