@@ -23,6 +23,17 @@ As a motor-impaired user, I want to:
 
 - Use all the features of the app without a mouse.
 
+## Learning Outcomes
+### Testing 
+- [x] Check that passing a given input into our tests returns the expected output
+- [x] Write tests to mimic the behaviour of a user performing different actions
+
+### JS
+- [x] Write testable, modular functions
+- [x] Write functions that add, remove or modify DOM nodes
+- [x] Apply event listeners to HTML form elements
+- [x] Use scope to control what variables are accessible inside functions and blocks
+
 ## Usage
 
 Clone this repo with the following command:
