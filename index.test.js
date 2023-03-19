@@ -1,25 +1,3 @@
-// test('Submitting a new task adds it to the list', () => {
-//   const expected = 12;
-//   addTask({ task: 'Wash dishes', done: false, id: 12 });
-//   const actual = tasks.filter((task) => task.task === 'Wash dishes')[0].id;
-//   equal(expected, actual);
-// });
-
-// test('Deleting an entry removes it from the list', () => {
-//   const expected = [];
-//   deleteTask('Go to the gym');
-//   const actual = tasks.filter((task) => task.task === 'Go to the gym');
-//   equal(JSON.stringify(expected), JSON.stringify(actual));
-// });
-
-// test('Checking an entry marks it as complete', () => {
-//   const expected = true;
-//   toggleCheckbox('wash the dishes', true);
-//   const actual = tasks.filter((task) => task.task === 'wash the dishes')[0]
-//     .done;
-//   equal(actual, expected);
-// });
-
 // -----------------------------
 // END TO END TESTS
 
@@ -40,7 +18,6 @@ test('E2E test: Submitting a new task adds it to the list', () => {
 });
 
 // delete a task
-
 test('E2E test: Deleting an entry removes it from the list', () => {
   const addNewTask = document.querySelector('.task-input');
   addNewTask.value = 'Go to the gym';
@@ -68,7 +45,6 @@ test('E2E test: Deleting an entry removes it from the list', () => {
 });
 
 // edit a task
-
 test('E2E test: Editing a task updates it after submission', () => {
   const addNewTask = document.querySelector('.task-input');
   addNewTask.value = 'Get Groceries';
@@ -99,6 +75,7 @@ test('E2E test: Editing a task updates it after submission', () => {
   equal(expected, actual);
 });
 
+// clear all tasks
 test('E2E test: "Clear all" button clears all tasks from the list', () => {
   // Add some tasks
   const addNewTask = document.querySelector('.task-input');

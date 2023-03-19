@@ -158,7 +158,6 @@ const editTask = (taskText) => {
   const inputElement = document.querySelector('.task-input');
   inputElement.value = taskText;
   inputElement.focus();
-  deleteTask(taskText);
 };
 
 // ----------------------------
